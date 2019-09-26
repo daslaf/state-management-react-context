@@ -6,20 +6,23 @@ const CategoriesContext = createContext();
 const { Provider, Consumer } = CategoriesContext;
 
 const CategoriesProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState({ error: null, isLoaded: false, items: [] });
 
   useEffect(() => {
-    getCategories().then(res => {
-      const _categories = res.map(name => ({ name, id: slugify(name).toLowerCase() }))
+    getCategories().then(
+      res => {
+        const _categories = res.map(name => ({ name, id: slugify(name).toLowerCase() }));
 
-      setCategories(_categories);
-    });
+        setCategories(previous => ({ ...previous, isLoaded: true, items: _categories }));
+      },
+      error => {
+        setCategories(previous => ({ ...previous, error, isLoaded: true }));
+      }
+    );
   }, []);
 
-  return (
-    <Provider value={categories}>{children}</Provider>
-  );
-}
+  return <Provider value={categories}>{children}</Provider>;
+};
 
 export default CategoriesContext;
-export { CategoriesProvider, Consumer as CategoriesConsumer  };
+export { CategoriesProvider, Consumer as CategoriesConsumer };

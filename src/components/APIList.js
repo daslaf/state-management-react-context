@@ -10,12 +10,12 @@ const APIList = ({ items = [] }) => {
     return (
       <>
         <h1>No has seleccionado ninguna categoría</h1>
-        <NavLink to='/categories'>Seleccionar -></NavLink>
+        <NavLink to="/categories">Seleccionar -></NavLink>
       </>
-    )
+    );
   }
 
-  return <h1>For {favoriteCategories.keys.length} categories there are some APIs</h1>
-}
+  return <h1>My APIs: For {favoriteCategories.keys.length} categories there are some APIs</h1>;
+};
 
 export default APIList;

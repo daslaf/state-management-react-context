@@ -10,7 +10,7 @@ function App() {
       <AppNavigation />
       <AppRouter />
     </Router>
-  )
+  );
 }
 
 export default App;

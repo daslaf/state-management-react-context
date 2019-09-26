@@ -1,42 +1,61 @@
-import React, { createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useMemo } from 'react';
 import useLocalStorage from 'react-use-localstorage';
 
 const FavoriteCategoriesContext = createContext();
 const { Provider, Consumer } = FavoriteCategoriesContext;
 
+const INITIAL_STATE = { keys: [], data: {} };
+
 const FavoriteCategoriesProvider = ({ children }) => {
-  const [favoriteCategories, setFavoriteCategories] = useLocalStorage('favoriteCategories', JSON.stringify({ keys: [], data: {} }));
+  const [favoriteCategories, setFavoriteCategories] = useLocalStorage(
+    'favoriteCategories',
+    JSON.stringify(INITIAL_STATE)
+  );
 
-  const toggleCategory = useCallback(category => {
-    setFavoriteCategories(_previous =>  {
-      const previous = JSON.parse(_previous);
+  const categories = useMemo(() => JSON.parse(favoriteCategories), [favoriteCategories]);
 
-      if (previous.data[category.id]) {        
-        const keys = previous.keys.filter(id => id !== category.id);
+  const toggleCategory = useCallback(
+    category => {
+      setFavoriteCategories(_previous => {
+        const previous = JSON.parse(_previous);
 
-        return JSON.stringify({
-          keys,
-          data: keys.reduce((acc, id) => ({
-            ...acc,
-            [id]: previous.data[id]
-          }), {}),
-        });
-      } else {
-        return JSON.stringify({
-          keys: [ ...previous.keys, category.id ],
-          data: {
-            ...previous.data,
-            [category.id]: category
-          }
-        })
-      }
+        if (previous.data[category.id]) {
+          const keys = previous.keys.filter(id => id !== category.id);
+
+          return JSON.stringify({
+            keys,
+            data: keys.reduce(
+              (acc, id) => ({
+                ...acc,
+                [id]: previous.data[id],
+              }),
+              {}
+            ),
+          });
+        } else {
+          return JSON.stringify({
+            keys: [...previous.keys, category.id],
+            data: {
+              ...previous.data,
+              [category.id]: category,
+            },
+          });
+        }
       });
+    },
+    [setFavoriteCategories]
+  );
+
+  const clearAll = useCallback(() => {
+    setFavoriteCategories(JSON.stringify(INITIAL_STATE));
   }, [setFavoriteCategories]);
 
   return (
-    <Provider value={{ favoriteCategories: JSON.parse(favoriteCategories), toggleCategory }}>{children}</Provider>
+    <Provider value={{ favoriteCategories: categories, clearAll, toggleCategory }}>
+      {children}
+    </Provider>
   );
-}
+};
 
 export default FavoriteCategoriesContext;
-export { FavoriteCategoriesProvider, Consumer as FavoriteCategoriesConsumer  };
+export { FavoriteCategoriesProvider, Consumer as FavoriteCategoriesConsumer };

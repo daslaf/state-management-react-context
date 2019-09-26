@@ -1,13 +1,293 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import-normalize;
+
+:root {
+  --cornershop-ui: #ff404c;
+  --cornershop-ui--shaded: #ef303c;
+  --lapis: #105aff;
+  --lapis--soft: #509aff;
+
+  /* Borders */
+  --bordered: 1px solid rgba(0, 0, 0, .1);
+  --rounded: .5rem;
+
+  /* Shadows */
+  --slight-shadow: 0 1px 2px -1px rgba(0,0,0,.2);
+  --mild-shadow:
+    0 2px 4px -2px rgba(0,0,0,.2),
+    0 4px 8px -4px rgba(0,0,0,.2);
+  --mild-shadow--reverse:
+    0 -2px 4px -2px rgba(0,0,0,.2),
+    0 -4px 8px -4px rgba(0,0,0,.2);
+  --deep-shadow:
+    0 2px 4px -2px rgba(0,0,0,.2),
+    0 4px 8px -4px rgba(0,0,0,.2),
+    0 8px 16px -8px rgba(0,0,0,.2),
+    0 16px 32px -16px rgba(0,0,0,.2);
+  --deepest-shadow:
+    0 2px 4px -2px rgba(0,0,0,.2),
+    0 4px 8px -4px rgba(0,0,0,.2),
+    0 8px 16px -8px rgba(0,0,0,.2),
+    0 16px 32px -16px rgba(0,0,0,.2),
+    0 32px 64px -32px rgba(0,0,0,.2),
+    0 64px 128px -64px rgba(0,0,0,.2);
+  
+  --regular-line-height: 1.42857143;
+  --main-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Spacing */
+  --boxed-padding: .75rem 1rem;
+  --boxed-padding--small: .5rem .75rem;
+  --boxed-padding--smallest: .375rem .5rem;
+  --boxed-margin: .75rem 0;
+  --boxed-margin--small: .5em 0;
+
+  /* Easing */
+  --quick-easing: cubic-bezier(0.4, 0.0, 0.2, 1.0);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  color: var(--soft-black);
+}
+hr {
+  border: 0;
+  border-bottom: var(--bordered);
+  margin: 1rem 0;
+}
+
+input, button, textarea, select {
+  font-family: var(--main-family);
+}
+
+.ui-container {
+  max-width: 992px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.ui-header {
+  padding: var(--boxed-padding--small);
+  margin-bottom: 1rem;
+
+  background: #fff;
+  border-bottom: var(--bordered);
+  box-shadow: var(--mild-shadow);
+}
+
+.ui-nav {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.ui-nav__link {
+  display: inline-block;
+  padding: var(--boxed-padding--small);
+  
+  background-color: transparent;
+  border-radius: var(--rounded);
+  color: var(--soft-black);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: var(--regular-line-height);
+  text-decoration: none;
+
+  transition: all .195s var(--quick-easing);
+}
+.ui-nav__link + .ui-nav__link {
+  margin-left: .5rem;
+}
+.ui-nav__link--active {
+  color: var(--lapis);
+  font-weight: 500;
+}
+.ui-nav__link:hover,
+.ui-nav__link:focus {
+  background-color: rgba(0, 0, 0, .075);
+}
+
+.ui-card {
+  position: relative;
+  padding: 1rem;
+
+  background: white;
+  border: var(--bordered);
+  border-radius: var(--rounded);
+
+  box-shadow: var(--mild-shadow);
+}
+
+.ui-shrug {
+  display: block;
+  margin: .75rem auto 1.5rem;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+  opacity: .4;
+}
+
+.ui-title {
+  margin: var(--boxed-margin--small);
+  font-size: 1.5rem;
+}
+
+.ui-spinner {
+  height: 80px;
+  text-align: center;
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+}
+.ui-spinner svg path,
+.ui-spinner svg rect {
+  fill: #bebec0;
+}
+
+.ui-text {
+  margin: var(--boxed-margin--small);
+  font-size: 1.125rem;
+}
+
+.ui-button {
+  min-width: 6rem;
+  padding: .5rem .75rem;
+  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--cornershop-ui);
+  border: var(--bordered);
+  border-radius: var(--rounded);
+  box-shadow: 0 0 0 0 rgba(0,0,0,1);
+  text-shadow: var(--slight-shadow);
+  color: white;
+
+  cursor: pointer;
+
+  font-family: var(--main-family);
+  font-size: var(--small-font-size);
+  font-weight: 600;
+  line-height: var(--regular-line-height);
+  text-align: center;
+  text-decoration: none;
+
+  transition: background-color .195s var(--quick-easing), box-shadow .195s var(--quick-easing);
+}
+.ui-button:hover,
+.ui-button:focus {
+  background-color: var(--cornershop-ui--shaded);
+  box-shadow: var(--mild-shadow);
+}
+.ui-button[disabled],
+.ui-button[disabled]:hover {
+  background-color: var(--cornershop-ui);
+  box-shadow: none;
+  box-shadow: 0 0 0 0 rgba(0,0,0,1);
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: .65;
+}
+
+.ui-search {
+  display: block;
+  max-width: 240px;
+  width: 100%;
+  padding: var(--boxed-padding--small);
+  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  
+  background-color: white;
+  border: var(--bordered);
+  border-radius: var(--rounded);
+  box-sizing: border-box;
+  
+  font: inherit;
+  font-size: .875rem;
+  line-height: var(--regular-line-height);
+}
+
+.ui-categories {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: -.5rem;
+}
+.ui-category {
+  margin: .5rem;
+}
+.ui-category__content {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  transition: all .195s var(--quick-easing);
+}
+.ui-category__content--checked {
+  background-color: #28283a;
+  color: #fff;
+}
+
+.ui-category__content:focus-within,
+.ui-category__content:hover {
+  box-shadow: var(--deep-shadow);
+  transform: scale(1.05);
+}
+
+.ui-category__content:focus-within {
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 5px;
+}
+.ui-category__control {
+  opacity: 0;
+  position: absolute;
+}
+
+/* Flexbox */
+.ui-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+}
+.ui-flex--column {
+  flex-direction: column;
+}
+.ui-flex__item {
+  flex: 1;
+}
+.ui-inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.ui-flex--wrap {
+  flex-wrap: wrap;
+}
+.ui-flex--stretch {
+  align-items: stretch;
+}
+.ui-flex--start {
+  align-items: flex-start;
+}
+.ui-flex--end {
+  align-items: flex-end;
+}
+.ui-flex--center {
+  justify-content: center;
+}
+.ui-flex--left {
+  justify-content: flex-start;
+}
+.ui-flex--right {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 767.98px) {
+  .ui-container {
+    padding: 0 .5rem;
+  }
 }
