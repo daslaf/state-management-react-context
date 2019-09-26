@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import APIList from './APIList';
+import APIsView from './APIsView';
 import Categories from './Categories';
 
 const AppRouter = () => {
   return (
     <main className="ui-container">
-      <Route exact path="/" component={APIList} />
+      <Route exact path="/" component={APIsView} />
       <Route exact path="/categories" component={Categories} />
     </main>
   );

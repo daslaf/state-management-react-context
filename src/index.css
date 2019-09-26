@@ -91,7 +91,7 @@ input, button, textarea, select {
   line-height: var(--regular-line-height);
   text-decoration: none;
 
-  transition: all .195s var(--quick-easing);
+  transition: all .195s ease;
 }
 .ui-nav__link + .ui-nav__link {
   margin-left: .5rem;
@@ -128,6 +128,13 @@ input, button, textarea, select {
 .ui-title {
   margin: var(--boxed-margin--small);
   font-size: 1.5rem;
+}
+.ui-subtitle {
+  margin: var(--boxed-margin--small);
+  font-size: .875rem;
+  font-weight: 600;
+  color: #8d8d8d;
+  text-transform: uppercase;
 }
 
 .ui-spinner {
@@ -222,7 +229,7 @@ input, button, textarea, select {
   display: block;
   cursor: pointer;
   position: relative;
-  transition: all .195s var(--quick-easing);
+  transition: all .195s ease;
 }
 .ui-category__content--checked {
   background-color: #28283a;
@@ -244,6 +251,35 @@ input, button, textarea, select {
 .ui-category__control {
   opacity: 0;
   position: absolute;
+}
+
+.ui-apis {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.ui-api + .ui-api {
+  margin-top: 1rem;
+}
+
+.ui-api__content {
+  color: inherit;
+  text-decoration: none;
+  transition: all .195s ease-out;
+}
+.ui-api__content:focus,
+.ui-api__content:hover {
+  box-shadow: var(--deep-shadow);
+  transform: scale(1.02);
+}
+
+.ui-api__name {
+  font-size: 1.125rem;
+}
+
+.ui-api__description {
+  font-size: .875rem;
+  margin: .125rem 0;
 }
 
 /* Flexbox */
