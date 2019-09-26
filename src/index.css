@@ -1,9 +1,8 @@
 @import-normalize;
 
 :root {
-  --cornershop-ui: #ff404c;
-  --cornershop-ui--shaded: #ef303c;
   --lapis: #105aff;
+  --lapis--shaded: #004aef;
   --lapis--soft: #509aff;
 
   /* Borders */
@@ -156,7 +155,7 @@ input, button, textarea, select {
   align-items: center;
   justify-content: center;
 
-  background-color: var(--cornershop-ui);
+  background-color: var(--lapis);
   border: var(--bordered);
   border-radius: var(--rounded);
   box-shadow: 0 0 0 0 rgba(0,0,0,1);
@@ -176,12 +175,12 @@ input, button, textarea, select {
 }
 .ui-button:hover,
 .ui-button:focus {
-  background-color: var(--cornershop-ui--shaded);
+  background-color: var(--lapis--shaded);
   box-shadow: var(--mild-shadow);
 }
 .ui-button[disabled],
 .ui-button[disabled]:hover {
-  background-color: var(--cornershop-ui);
+  background-color: var(--lapis);
   box-shadow: none;
   box-shadow: 0 0 0 0 rgba(0,0,0,1);
   cursor: not-allowed;
